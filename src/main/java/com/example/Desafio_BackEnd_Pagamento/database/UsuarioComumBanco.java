@@ -1,7 +1,6 @@
 package com.example.Desafio_BackEnd_Pagamento.database;
 
 import com.example.Desafio_BackEnd_Pagamento.model.UsuarioComum;
-
 import java.util.ArrayList;
 import java.util.List;
 
