@@ -11,8 +11,9 @@ public class UsuarioLojistaController {
         return banco.findAllUsuarioLojista();
     }
 
-    public void postarUsuarioLojista(UsuarioLojista ul){
+    public boolean postarUsuarioLojista(UsuarioLojista ul){
         banco.insertUsuarioLojista(ul);
+        return true;
     }
 
     public boolean atualizarUsuarioLojista(UsuarioLojista ul){

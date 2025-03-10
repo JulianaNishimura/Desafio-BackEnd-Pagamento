@@ -18,8 +18,10 @@ public class EndpointUsuarioComum {
 
     @PostMapping
     public String postInformationsUsuariosComuns(@RequestBody UsuarioComum uc){
-        c.postarUsuarioComum(uc);
-        return "Sucesso ao cadastrar";
+        if(c.postarUsuarioComum(uc)){
+            return "Sucesso ao cadastrar";
+        }
+        return "Falha ao cadastrar";
     }
 
     @PutMapping

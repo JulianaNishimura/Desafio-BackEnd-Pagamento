@@ -11,8 +11,9 @@ public class UsuarioComumController {
         return banco.findAllUsuarioComum();
     }
 
-    public void postarUsuarioComum(UsuarioComum uc){
+    public boolean postarUsuarioComum(UsuarioComum uc){
         banco.insertUsuarioComum(uc);
+        return true;
     }
 
     public boolean atualizarUsuarioComum(UsuarioComum ul){

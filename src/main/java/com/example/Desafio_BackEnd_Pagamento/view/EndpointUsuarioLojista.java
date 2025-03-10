@@ -17,8 +17,10 @@ public class EndpointUsuarioLojista {
 
     @PostMapping
     public String postInformationsUsuariosLojistas(@RequestBody UsuarioLojista ul){
-        c.postarUsuarioLojista(ul);
-        return "Sucesso ao cadastrar";
+        if(c.postarUsuarioLojista(ul)){
+            return "Sucesso ao cadastrar";
+        }
+        return "Falha ao cadastrar";
     }
 
     @PutMapping
