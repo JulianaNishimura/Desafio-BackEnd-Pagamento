@@ -7,8 +7,6 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 public class UsuarioComum {
     private String nomeCompleto;
     private String CPF;
@@ -16,4 +14,43 @@ public class UsuarioComum {
     private String senha;
     private Double carteira;
 
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Double getCarteira() {
+        return carteira;
+    }
+
+    public void setCarteira(Double carteira) {
+        this.carteira = carteira;
+    }
 }
