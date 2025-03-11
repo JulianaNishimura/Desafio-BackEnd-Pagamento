@@ -19,7 +19,7 @@ public class UsuarioLojistaBanco {
         usuarioslojistas.add(ul);
     }
 
-    public UsuarioLojista findOneUsuarioLojista(Long cnpj){
+    public UsuarioLojista findOneUsuarioLojista(String cnpj){
         for(UsuarioLojista ul : usuarioslojistas){
             if(ul.getCnpj().equals(cnpj)){
                 return ul;
@@ -58,7 +58,7 @@ public class UsuarioLojistaBanco {
 //        return indexOpt.isPresent();
     }
 
-    public boolean deleteUsuarioLojista(Long cnpj){
+    public boolean deleteUsuarioLojista(String cnpj){
         return usuarioslojistas.removeIf(ul -> ul.getCnpj().equals(cnpj));
     }
 }

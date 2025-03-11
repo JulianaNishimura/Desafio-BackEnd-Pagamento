@@ -3,14 +3,16 @@ package com.example.Desafio_BackEnd_Pagamento.model;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioLojista {
     private String nomeCompleto;
-    private Long cnpj;
+    private String cnpj;
     private String email;
     private String senha;
-    private Double carteira;
+    private BigDecimal carteira;
 
     public String getNomeCompleto() {
         return nomeCompleto;
@@ -20,11 +22,11 @@ public class UsuarioLojista {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public Long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -44,11 +46,11 @@ public class UsuarioLojista {
         this.senha = senha;
     }
 
-    public Double getCarteira() {
+    public BigDecimal getCarteira() {
         return carteira;
     }
 
-    public void setCarteira(Double carteira) {
+    public void setCarteira(BigDecimal carteira) {
         this.carteira = carteira;
     }
 }

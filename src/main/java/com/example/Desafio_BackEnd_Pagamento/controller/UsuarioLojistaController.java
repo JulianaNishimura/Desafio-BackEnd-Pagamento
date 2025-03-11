@@ -12,6 +12,17 @@ public class UsuarioLojistaController {
     }
 
     public boolean postarUsuarioLojista(UsuarioLojista ul){
+        List<UsuarioLojista> usuariosloj = banco.findAllUsuarioLojista();
+
+        if(banco.findOneUsuarioLojista(ul.getCnpj()) != null){
+            return false;
+        }
+        for(UsuarioLojista u : usuariosloj){
+            if(u.getEmail().equals(ul.getEmail())){
+                return false;
+            }
+        }
+
         banco.insertUsuarioLojista(ul);
         return true;
     }
@@ -20,7 +31,7 @@ public class UsuarioLojistaController {
         return banco.updateUsuarioLojista(ul);
     }
 
-    public boolean deletarUsuarioLojista(String cpf){
-        return banco.deleteUsuarioLojista(cpf);
+    public boolean deletarUsuarioLojista(String cnpj){
+        return banco.deleteUsuarioLojista(cnpj);
     }
 }
