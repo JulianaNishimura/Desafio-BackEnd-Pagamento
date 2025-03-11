@@ -19,13 +19,19 @@ public class UsuarioLojistaBanco {
         usuarioslojistas.add(ul);
     }
 
-    public UsuarioLojista findOneUsuarioLojista(String cpf){
+    public UsuarioLojista findOneUsuarioLojista(Long cnpj){
         for(UsuarioLojista ul : usuarioslojistas){
-            if(ul.getCPF() == cpf){
+            if(ul.getCnpj().equals(cnpj)){
                 return ul;
             }
         }
         return  null;
+
+//        ou
+//        return usuariosLojistas.stream()
+//                .filter(ul -> ul.getCnpj().equals(cnpj))
+//                .findFirst()
+//                .orElse(null);
     }
 
     public List<UsuarioLojista> findAllUsuarioLojista() {
@@ -34,15 +40,25 @@ public class UsuarioLojistaBanco {
 
     public boolean updateUsuarioLojista(UsuarioLojista ul){
         for(int i = 0; i < usuarioslojistas.size();i++){
-            if(usuarioslojistas.get(i).getCPF() == ul.getCPF()){
+            if(usuarioslojistas.get(i).getCnpj().equals(ul.getCnpj())){
                 usuarioslojistas.set(i,ul);
                 return true;
             }
         }
         return false;
+
+//        ou
+//        Optional<Integer> indexOpt =
+//                usuariosLojistas.stream()
+//                        .filter(u -> u.getCnpj().equals(ul.getCnpj()))
+//                        .map(usuariosLojistas::indexOf)
+//                        .findFirst();
+//
+//        indexOpt.ifPresent(index -> usuariosLojistas.set(index, ul));
+//        return indexOpt.isPresent();
     }
 
-    public boolean deleteUsuarioLojista(String cpf){
-        return usuarioslojistas.removeIf(ul -> ul.getCPF() == cpf);
+    public boolean deleteUsuarioLojista(Long cnpj){
+        return usuarioslojistas.removeIf(ul -> ul.getCnpj().equals(cnpj));
     }
 }

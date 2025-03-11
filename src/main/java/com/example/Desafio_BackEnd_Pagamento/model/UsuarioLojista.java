@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UsuarioLojista {
     private String nomeCompleto;
-    private String CPF;
+    private Long cnpj;
     private String email;
     private String senha;
     private Double carteira;
@@ -20,12 +20,12 @@ public class UsuarioLojista {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public String getCPF() {
-        return CPF;
+    public Long getCnpj() {
+        return cnpj;
     }
 
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCnpj(Long cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getEmail() {

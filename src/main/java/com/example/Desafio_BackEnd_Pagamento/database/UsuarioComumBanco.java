@@ -19,9 +19,9 @@ public class UsuarioComumBanco {
         usuarioscomuns.add(uc);
     }
 
-    public UsuarioComum findOneUsuarioComum(String cpf){
+    public UsuarioComum findOneUsuarioComum(Long cpf){
         for(UsuarioComum u : usuarioscomuns){
-            if(u.getCPF() == cpf){
+            if(u.getCPF().equals(cpf)){
                 return u;
             }
         }
@@ -34,7 +34,7 @@ public class UsuarioComumBanco {
 
     public boolean updateUsuarioComum(UsuarioComum u){
         for(int i = 0; i < usuarioscomuns.size();i++){
-            if(usuarioscomuns.get(i).getCPF() == u.getCPF()){
+            if(usuarioscomuns.get(i).getCPF().equals(u.getCPF())){
                 usuarioscomuns.set(i,u);
                 return true;
             }
@@ -42,7 +42,7 @@ public class UsuarioComumBanco {
         return false;
     }
 
-    public boolean deleteUsuarioComum(String cpf){
-        return usuarioscomuns.removeIf(u -> u.getCPF() == cpf);
+    public boolean deleteUsuarioComum(Long cpf){
+        return usuarioscomuns.removeIf(u -> u.getCPF().equals(cpf));
     }
 }
