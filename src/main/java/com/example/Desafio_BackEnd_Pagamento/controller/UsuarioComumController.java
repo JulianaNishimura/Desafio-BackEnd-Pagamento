@@ -1,40 +1,67 @@
 package com.example.Desafio_BackEnd_Pagamento.controller;
 
-import com.example.Desafio_BackEnd_Pagamento.database.UsuarioComumBanco;
-import com.example.Desafio_BackEnd_Pagamento.model.UsuarioComum;
-import com.example.Desafio_BackEnd_Pagamento.model.UsuarioLojista;
-
+import com.example.Desafio_BackEnd_Pagamento.entity.UsuarioComum;
+import com.example.Desafio_BackEnd_Pagamento.repository.UsuarioComumRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@RestController
+@RequestMapping("/usuariosComuns")
 public class UsuarioComumController {
-    UsuarioComumBanco banco = UsuarioComumBanco.getInstance();
+    @Autowired
+    private UsuarioComumRepository ucRepository;
 
-    public List<UsuarioComum> listarUsuariosComuns(){
-        return banco.findAllUsuarioComum();
-    }
-
-    public boolean postarUsuarioComum(UsuarioComum uc){
-        List<UsuarioComum> usuariosco = banco.findAllUsuarioComum();
-
-        if(banco.findOneUsuarioComum(uc.getCPF()) != null){
-            return false;
+    @PostMapping("/add")
+    public ResponseEntity<String> adicionarUsuarioComum(@RequestBody UsuarioComum uc) {
+        if(ucRepository.existsById(uc.getCPF())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Esse CPF já está cadastrado.");
         }
 
-        for(UsuarioComum u : usuariosco){
-            if(u.getEmail().equals(uc.getEmail())){
-                return false;
-            }
+        if(ucRepository.existsByEmail(uc.getEmail())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Esse email já está cadastrado.");
         }
 
-        banco.insertUsuarioComum(uc);
-        return true;
+        ucRepository.save(uc);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário adicionado com sucesso.");
     }
 
-    public boolean atualizarUsuarioComum(UsuarioComum ul){
-        return banco.updateUsuarioComum(ul);
+    @GetMapping("/get")
+    public ResponseEntity<List<UsuarioComum>> listarUsuariosComuns() {
+        List<UsuarioComum> usuarios = ucRepository.findAll();
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.ok(usuarios);
     }
 
-    public boolean deletarUsuarioComum(String cpf){
-        return banco.deleteUsuarioComum(cpf);
+    @PutMapping("/{cpf}")
+    public ResponseEntity<String> atualizarUsuarioComum(@PathVariable String cpf, @RequestBody UsuarioComum uc) {
+        if (!ucRepository.existsById(cpf)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
+        }
+
+        if(ucRepository.existsById(uc.getCPF())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Esse CPF já está cadastrado.");
+        }
+
+        if(ucRepository.existsByEmail(uc.getEmail())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Esse email já está cadastrado.");
+        }
+
+        uc.setCPF(cpf);
+        ucRepository.save(uc);
+        return ResponseEntity.status(HttpStatus.OK).body("Usuário atualizado com sucesso.");
+    }
+
+    @DeleteMapping("/deletar/{cpf}")
+    public ResponseEntity<String> deletarUsuarioComum(@PathVariable String cpf) {
+        if (!ucRepository.existsById(cpf)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
+        }
+        ucRepository.deleteById(cpf);
+        return ResponseEntity.status(HttpStatus.OK).body("Usuário deletado com sucesso.");
     }
 }

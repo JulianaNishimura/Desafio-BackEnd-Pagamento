@@ -1,14 +1,18 @@
-package com.example.Desafio_BackEnd_Pagamento.model;
+package com.example.Desafio_BackEnd_Pagamento.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class UsuarioComum {
     private String nomeCompleto;
+
+    @Id
     private String cpf;
     private String email;
     private String senha;
