@@ -43,14 +43,6 @@ public class UsuarioComumController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
         }
 
-        if(ucRepository.existsById(uc.getCPF())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Esse CPF já está cadastrado.");
-        }
-
-        if(ucRepository.existsByEmail(uc.getEmail())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Esse email já está cadastrado.");
-        }
-
         uc.setCPF(cpf);
         ucRepository.save(uc);
         return ResponseEntity.status(HttpStatus.OK).body("Usuário atualizado com sucesso.");

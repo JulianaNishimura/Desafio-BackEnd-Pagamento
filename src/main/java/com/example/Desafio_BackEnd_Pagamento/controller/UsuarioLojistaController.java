@@ -51,14 +51,6 @@ public class UsuarioLojistaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lojista não encontrado.");
         }
 
-        if(ulRepository.existsByCpf(ul.getCpf()) || ucRepository.existsById(ul.getCpf())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Esse CPF já está cadastrado.");
-        }
-
-        if(ulRepository.existsByEmail(ul.getEmail()) || ucRepository.existsByEmail(ul.getEmail())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Esse email já está cadastrado.");
-        }
-
         ul.setCnpj(cnpj);
         ulRepository.save(ul);
         return ResponseEntity.status(HttpStatus.OK).body("Lojista atualizado com sucesso.");
